@@ -1,22 +1,13 @@
-'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const Pool = require('pg').Pool;
 
-
-var TaskSchema = new Schema({
-   Firstname: {
-    type: String,
-    // required: 'Kindly enter the name of the task'
-  },
-  Lastname: {
-    type: String,
-    // default: Date.now
-  },
-  Email: {
-    type: String,
-    // default: Date.now
-  },
-  
+const pool = new Pool({
+  user: "postgres",
+  password: "uchechi",
+  database: "users_database",
+  host: "localhost",
+  port: 5432,
+  max: 10,
+  idleTimeoutMillis: 30000,
 });
 
-module.exports = mongoose.model('Tasks', TaskSchema);
+module.exports = pool;
